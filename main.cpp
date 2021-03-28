@@ -15,6 +15,23 @@ unsigned int leds_num [] = {GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO
 unsigned int sw_num [] = {GPIO_PIN_4,GPIO_PIN_8,GPIO_PIN_10, GPIO_PIN_12};
 unsigned int proc_num [] = {GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
 
+
+// Базовое состоние SW
+GPIO_PinState state_arr[4];
+
+
+/*
+ * Проверка состояния SW
+ * */
+bool check_sw() {
+    for (size_t i = 0; i < 4;i++){
+        state_arr[i] = HAL_GPIO_ReadPin(GPIOE,sw_num[i]);
+    }
+    if (state_arr[1] && state_arr[3] && (state_arr[0] == 0) && (state_arr[2] == 0)){
+        return true;
+    }
+    return false;
+}
 /*
  * Реализация работы с LED и простоя в случае нажатия на nBTN
  * */
@@ -23,6 +40,10 @@ void pod_program() {
     int64_t point = 7;
     HAL_Delay(delay);
     for (size_t i = 0; i < 14; i++) {
+        if (!check_sw()) {
+            HAL_Delay(300);
+            break;
+        }
         GPIO_PinState state = HAL_GPIO_ReadPin(GPIOC, proc_num[2]);
         HAL_Delay(delay);
         while (state == GPIO_PIN_RESET){
@@ -70,6 +91,7 @@ void pod_program() {
  * Основная функция
  * Работа со стандартными SW и включение/выключение оранжевой лампочки
  * */
+
 int umain() {
     GPIO_PinState state_arr[4];
     while (1) {
