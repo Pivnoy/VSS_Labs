@@ -93,7 +93,6 @@ void pod_program() {
  * */
 
 int umain() {
-    GPIO_PinState state_arr[4];
     while (1) {
         for (size_t i = 0; i < 4;i++){
             state_arr[i] = HAL_GPIO_ReadPin(GPIOE,sw_num[i]);
