@@ -2,10 +2,6 @@
 #include <unistd.h>
 
 
-/* WARNING
- * По условию лабораторной работы delay = 500 и должен простаивать только при переключении LED,
- * но программа содержит дополнительные простои для совместимости  с Virtual Lab
- * */
 /*
  * LED
  * SW
@@ -44,13 +40,17 @@ void pod_program() {
             HAL_Delay(300);
             break;
         }
+        HAL_Delay(300);
         GPIO_PinState state = HAL_GPIO_ReadPin(GPIOC, proc_num[2]);
-        HAL_Delay(delay);
-        while (state == GPIO_PIN_RESET){
-            HAL_Delay(delay);
+        //Обработка кнопки
+        if (state == GPIO_PIN_RESET){
             HAL_GPIO_WritePin(GPIOD, proc_num[0],GPIO_PIN_RESET);
             HAL_GPIO_WritePin(GPIOD, proc_num[2],GPIO_PIN_SET);
-            state = HAL_GPIO_ReadPin(GPIOC, proc_num[2]);
+            state = GPIO_PIN_SET;
+            while (state == GPIO_PIN_SET){
+                state = HAL_GPIO_ReadPin(GPIOC,proc_num[2]);
+                HAL_Delay(300);
+            }
         }
         HAL_GPIO_WritePin(GPIOD, proc_num[0],GPIO_PIN_SET);
         HAL_GPIO_WritePin(GPIOD, proc_num[2],GPIO_PIN_RESET);
