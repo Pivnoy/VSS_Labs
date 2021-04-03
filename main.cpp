@@ -1,7 +1,6 @@
 #include "hal.h"
 #include <unistd.h>
 
-
 /*
  * LED
  * SW
