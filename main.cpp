@@ -6,9 +6,9 @@
  * SW
  * nBTN
  * */
-unsigned int leds_num [] = {GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_11, GPIO_PIN_12};
-unsigned int sw_num [] = {GPIO_PIN_4,GPIO_PIN_8,GPIO_PIN_10, GPIO_PIN_12};
-unsigned int proc_num [] = {GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
+unsigned int64_t leds_num [] = {GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_11, GPIO_PIN_12};
+unsigned int64_t sw_num [] = {GPIO_PIN_4,GPIO_PIN_8,GPIO_PIN_10, GPIO_PIN_12};
+unsigned int64_t proc_num [] = {GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
 
 
 // Базовое состоние SW
@@ -92,7 +92,7 @@ void pod_program() {
  * */
 
 int umain() {
-    while (1) {
+    while (true) {
         for (size_t i = 0; i < 4;i++){
             state_arr[i] = HAL_GPIO_ReadPin(GPIOE,sw_num[i]);
         }
