@@ -1,4 +1,4 @@
-#include "hal.h"
+#include "../lab2/hal.h"
 #include <unistd.h>
 
 /*
@@ -6,9 +6,9 @@
  * SW
  * nBTN
  * */
-unsigned int64_t leds_num [] = {GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_11, GPIO_PIN_12};
-unsigned int64_t sw_num [] = {GPIO_PIN_4,GPIO_PIN_8,GPIO_PIN_10, GPIO_PIN_12};
-unsigned int64_t proc_num [] = {GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
+uint64_t leds_num [] = {GPIO_PIN_3, GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_11, GPIO_PIN_12};
+uint64_t sw_num [] = {GPIO_PIN_4,GPIO_PIN_8,GPIO_PIN_10, GPIO_PIN_12};
+uint64_t proc_num [] = {GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
 
 
 // Базовое состоние SW
@@ -117,3 +117,4 @@ int umain() {
     }
     return 0;
 }
+
